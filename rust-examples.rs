@@ -1,29 +1,8 @@
 
-/*
-
-// example O01
-
-fn main() {
-
-	let x = 15;
-	let y = x; // implements i32 Copy 
-	println!("{} {}", x, y);
-
-
-
-	let v = vec![1, 2, 3];
-	let v1 = v;
-	//println!("{}", v[0]); //fail because of antiAliasing
-	let j = 0;
-
-}
-
-*/
-
 
 /*
-
-OWNERSHIP TRANSFER.
+//example O01
+//OWNERSHIP TRANSFER.
 
 fn take(v: Vec<i32>)  {
 	println!("{}", v[0]); 
@@ -33,13 +12,13 @@ fn take(v: Vec<i32>)  {
 fn main() {
 	let v = vec![1,2,3];
 	take(v);
-	//println!("{}", v[0]); //fail because destroyed the owner.
+	// println!("{}", v[0]); //fail because destroyed the owner. doesnt compile.
 }
 */
 
 /*
 // example B01
-SHARED BORROWED: inmutable resource and many many borrowers.
+//SHARED BORROWED: inmutable resource and many many borrowers.
 
 fn take(v: &Vec<i32>){
 	println!("{}", v[0]); 
@@ -55,10 +34,10 @@ fn main() {
 */
 
 
-
+/*
 // example B02
 //MUTABLE BORROW: one pointer to the resource only one borrower.
-/*
+
 fn take(v: &mut Vec<i32>){
 	v.push(21);
 }
@@ -70,11 +49,11 @@ fn main() {
 	println!("{}", v[3]);
 
 }
-
 */
 
 /*
 
+// cant exist 2 share mutable
 fn main() {
 	let mut v = vec![1,2,3];
 
@@ -86,8 +65,8 @@ fn main() {
 	println!("{}", v[3]);
 
 }
-
 */
+
 
 /*
 // example C01
@@ -102,7 +81,7 @@ fn main() {
 
 	thread::spawn(move || {
 		let mut v = vec![1,2,3];
-		v.push(21);
+		v.push(210);
 		tx.send(v);
 	});
 
@@ -112,11 +91,11 @@ fn main() {
 
 }
 
-*/ 
+*/
 
 /*
 // example C02
-SHARED BORROW OF INMUTABLE.
+//SHARED BORROW OF INMUTABLE.
 
 use std::sync::Arc;
 use std::thread;
@@ -125,7 +104,7 @@ fn main() {
     let numbers = vec![1,2,3];
     let shared_numbers = Arc::new(numbers);
 
-    for id in 0..10 {
+    for id in 0..20 {
         let child_numbers = shared_numbers.clone();
 
         thread::spawn(move || {
